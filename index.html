@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PixelPeakSMP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+:root{
+--bg:#0b1020;
+--text:#ffffff;
+--card:rgba(10,16,35,.55);
+--nav:rgba(10,14,28,.28);
+--soft:#cfd7ea;
+--cyan:#28d8ff;
+--btn-dark:rgba(16,23,52,.58);
+}
+
+body.light{
+--bg:#edf3ff;
+--text:#09111f;
+--card:rgba(255,255,255,.58);
+--nav:rgba(255,255,255,.22);
+--soft:#44506b;
+--cyan:#00bfff;
+--btn-dark:rgba(255,255,255,.55);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+transition:.3s;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+linear-gradient(rgba(7,10,20,.68),rgba(7,10,20,.74)),
+url('https://i.ibb.co.com/p6HSMbhJ/2c551281768273ba1943ddb478cc21f5.jpg');
+background-size:cover;
+background-position:center;
+z-index:-1;
+transition:.3s;
+}
+
+body.light::before{
+background:
+linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.68)),
+url('https://i.ibb.co.com/p6HSMbhJ/2c551281768273ba1943ddb478cc21f5.jpg');
+background-size:cover;
+background-position:center;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:999;
+background:var(--nav);
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
+border-bottom:1px solid rgba(0,255,255,.08);
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 14px;
+}
+
+.logo{
+font-size:16px;
+font-weight:800;
+letter-spacing:.5px;
+}
+
+.nav-right{
+display:flex;
+gap:8px;
+}
+
+.icon-btn{
+width:42px;
+height:42px;
+border-radius:14px;
+background:rgba(16,23,52,.35);
+border:1px solid rgba(0,255,255,.14);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:15px;
+color:var(--cyan);
+cursor:pointer;
+backdrop-filter:blur(6px);
+}
+
+.mobile-menu{
+max-height:0;
+overflow:hidden;
+transition:.35s;
+padding:0 14px;
+}
+
+.mobile-menu.active{
+max-height:260px;
+padding-bottom:14px;
+}
+
+.menu-box{
+background:rgba(17,25,52,.45);
+backdrop-filter:blur(8px);
+padding:10px;
+border-radius:18px;
+}
+
+.menu-item{
+display:block;
+padding:12px 14px;
+border-radius:12px;
+margin-bottom:6px;
+font-size:14px;
+text-decoration:none;
+color:var(--soft);
+}
+
+.menu-item.active{
+background:rgba(18,58,87,.65);
+color:#24d8ff;
+}
+
+.hero{
+padding:34px 16px 18px;
+text-align:center;
+}
+
+.hero-title{
+font-size:40px;
+line-height:.95;
+font-weight:800;
+text-shadow:0 0 10px rgba(0,255,255,.18);
+}
+
+.hero-title span{
+color:#ffba1a;
+}
+
+.hero-desc{
+margin-top:14px;
+font-size:14px;
+line-height:1.9;
+letter-spacing:.4px;
+color:var(--soft);
+}
+
+.hero-buttons{
+margin-top:18px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+}
+
+.btn{
+width:78%;
+padding:12px;
+border:none;
+border-radius:14px;
+font-size:14px;
+font-weight:600;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+cursor:pointer;
+transition:.2s;
+}
+
+.btn:hover{
+transform:scale(.98);
+}
+
+.btn-primary{
+background:#2fd8ff;
+color:#08111c;
+}
+
+.btn-secondary{
+background:var(--btn-dark);
+color:var(--text);
+border:1px solid rgba(255,255,255,.05);
+backdrop-filter:blur(6px);
+}
+
+.container{
+padding:14px;
+}
+
+.card{
+background:var(--card);
+backdrop-filter:blur(8px);
+border:1px solid rgba(0,255,255,.08);
+border-radius:18px;
+padding:16px;
+margin-bottom:14px;
+}
+
+.stats{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.stats i{
+font-size:22px;
+color:var(--cyan);
+}
+
+.stats-title{
+font-size:13px;
+color:#97a1bf;
+}
+
+.stats-value{
+margin-top:2px;
+font-size:20px;
+font-weight:700;
+}
+
+.section-title{
+font-size:28px;
+line-height:1.15;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.section-title.blue{
+color:var(--cyan);
+}
+
+.section-text{
+font-size:14px;
+line-height:2.3;
+letter-spacing:.4px;
+color:var(--soft);
+}
+
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:18px;
+}
+
+.tag{
+padding:8px 14px;
+background:rgba(16,23,52,.40);
+backdrop-filter:blur(6px);
+border-radius:999px;
+font-size:11px;
+font-weight:600;
+}
+
+.feature-img{
+width:100%;
+border-radius:18px;
+margin-top:18px;
+}
+
+.feature-box{
+text-align:center;
+}
+
+.feature-box i{
+font-size:34px;
+color:var(--cyan);
+margin-bottom:12px;
+}
+
+.feature-box h3{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.feature-box p{
+font-size:14px;
+line-height:1.8;
+color:var(--soft);
+}
+
+footer{
+margin-top:24px;
+padding:28px 16px 40px;
+background:rgba(10,14,28,.25);
+backdrop-filter:blur(10px);
+border-top:1px solid rgba(255,255,255,.06);
+}
+
+.footer-logo{
+font-size:22px;
+font-weight:800;
+}
+
+.footer-desc{
+margin-top:8px;
+font-size:13px;
+line-height:1.7;
+color:var(--soft);
+}
+
+.footer-title{
+margin-top:22px;
+margin-bottom:12px;
+font-size:16px;
+font-weight:700;
+color:var(--cyan);
+}
+
+.footer-links{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.footer-links a{
+font-size:13px;
+text-decoration:none;
+color:var(--soft);
+}
+
+.copyright{
+margin-top:28px;
+padding-top:16px;
+border-top:1px solid rgba(255,255,255,.08);
+text-align:center;
+font-size:12px;
+color:var(--soft);
+}
+
+.owner{
+margin-top:10px;
+text-align:center;
+font-size:13px;
+letter-spacing:2px;
+color:var(--soft);
+}
+
+@media(min-width:700px){
+
+.hero,
+.container,
+footer{
+max-width:520px;
+margin:auto;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="navbar">
+
+<div class="logo">
+PIXELPEAKSMP
+</div>
+
+<div class="nav-right">
+
+<div class="icon-btn" id="themeBtn">
+<i class="fa-solid fa-moon"></i>
+</div>
+
+<div class="icon-btn" id="menuBtn">
+<i class="fa-solid fa-bars"></i>
+</div>
+
+</div>
+
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+
+<div class="menu-box">
+
+<a href="#" class="menu-item active">Home</a>
+<a href="store.html" class="menu-item">Store</a>
+<a href="vote.html" class="menu-item">Vote</a>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1 class="hero-title">
+PIXELPEAK<br>
+<span>SMP</span>
+</h1>
+
+<p class="hero-desc">
+Server Minecraft survival terbaik Indonesia
+dengan sistem economy modern dan komunitas aktif.
+</p>
+
+<div class="hero-buttons">
+
+<button class="btn btn-primary" onclick="copyIP()">
+<i class="fa-solid fa-play"></i>
+Play Now
+</button>
+
+<button class="btn btn-secondary" onclick="window.open('https://discord.gg/33uV4z963')">
+<i class="fa-brands fa-discord"></i>
+Join Discord
+</button>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<div class="card stats">
+
+<i class="fa-solid fa-gamepad"></i>
+
+<div>
+<div class="stats-title">Version</div>
+<div class="stats-value">1.8 - 1.21.x</div>
+</div>
+
+</div>
+
+<div class="card stats">
+
+<i class="fa-solid fa-server"></i>
+
+<div>
+<div class="stats-title">Player Register</div>
+<div class="stats-value">500+</div>
+</div>
+
+</div>
+
+<div class="card stats">
+
+<i class="fa-regular fa-message"></i>
+
+<div>
+<div class="stats-title">Bedrock Port</div>
+<div class="stats-value">25153</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<h2 class="section-title blue">
+What is PixelPeakSMP?
+</h2>
+
+<p class="section-text">
+PixelPeakSMP adalah server Minecraft economy terbaik di Indonesia
+yang menghadirkan pengalaman bermain modern untuk Java dan Bedrock.
+</p>
+
+</div>
+
+<div class="container">
+
+<h2 class="section-title">
+Server Economy<br>
+Terbaik
+</h2>
+
+<p class="section-text">
+Nikmati sistem economy modern,
+trading, investasi, dan survival seru.
+</p>
+
+<div class="tags">
+
+<div class="tag">Java & Bedrock</div>
+<div class="tag">Economy</div>
+<div class="tag">Indonesia</div>
+<div class="tag">24/7 Online</div>
+
+</div>
+
+<img class="feature-img"
+src="https://i.ibb.co.com/0y5f0v48/223a1521-60cf-4a82-b708-c5f2fdfcf163.jpg">
+
+</div>
+
+<div class="container">
+
+<div class="card feature-box">
+
+<i class="fa-solid fa-users"></i>
+
+<h3>Komunitas Aktif</h3>
+
+<p>
+Bergabung dengan ribuan player aktif
+dan komunitas Discord yang ramah.
+</p>
+
+</div>
+
+<div class="card feature-box">
+
+<i class="fa-solid fa-gamepad"></i>
+
+<h3>Cross Platform</h3>
+
+<p>
+Mainkan Java dan Bedrock
+dalam satu server.
+</p>
+
+</div>
+
+<div class="card feature-box">
+
+<i class="fa-regular fa-message"></i>
+
+<h3>Support 24/7</h3>
+
+<p>
+Support aktif setiap hari
+untuk seluruh pemain.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+
+<div class="footer-logo">
+PIXELPEAKSMP
+</div>
+
+<div class="footer-desc">
+Server Minecraft survival terbaik Indonesia
+</div>
+
+<div class="footer-title">
+Quick Links
+</div>
+
+<div class="footer-links">
+<a href="store.html">Store</a>
+<a href="vote.html">Vote</a>
+</div>
+
+<div class="footer-title">
+Legal
+</div>
+
+<div class="footer-links">
+<a href="#">Terms of Service</a>
+<a href="#">Privacy Policy</a>
+</div>
+
+<div class="copyright">
+© 2026 PIXELPEAKSMP
+</div>
+
+<div class="owner">
+ETHAN.OWNER
+</div>
+
+</footer>
+
+<script>
+
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+let openMenu = false;
+
+menuBtn.addEventListener("click", () => {
+
+openMenu = !openMenu;
+
+mobileMenu.classList.toggle("active");
+
+if(openMenu){
+menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+}else{
+menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+}
+
+});
+
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", () => {
+
+document.body.classList.toggle("light");
+
+if(document.body.classList.contains("light")){
+
+themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+
+}else{
+
+themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+
+}
+
+});
+
+function copyIP(){
+
+navigator.clipboard.writeText("pixelpeaksmp.my.id");
+
+alert("IP Server berhasil disalin!");
+
+}
+
+</script>
+
+</body>
+</html>
